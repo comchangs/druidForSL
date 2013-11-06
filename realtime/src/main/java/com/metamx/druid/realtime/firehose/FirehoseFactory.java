@@ -26,6 +26,7 @@ import java.io.IOException;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
+                  @JsonSubTypes.Type(name = "streamlyzer", value = SLKafkaFirehoseFactory.class),
                   @JsonSubTypes.Type(name = "kafka-0.7.2", value = KafkaFirehoseFactory.class),
                   @JsonSubTypes.Type(name = "rabbitmq", value = RabbitMQFirehoseFactory.class),
                   @JsonSubTypes.Type(name = "clipped", value = ClippedFirehoseFactory.class),
