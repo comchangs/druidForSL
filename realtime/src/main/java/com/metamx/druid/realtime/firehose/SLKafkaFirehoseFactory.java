@@ -28,7 +28,6 @@ import com.metamx.common.logger.Logger;
 import com.metamx.druid.indexer.data.StringInputRowParser;
 import com.metamx.druid.input.InputRow;
 
-import com.metamx.druid.realtime.SLDruidJMX;
 import kafka.consumer.Consumer;
 import kafka.consumer.ConsumerConfig;
 import kafka.consumer.KafkaStream;

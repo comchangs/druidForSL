@@ -6,7 +6,7 @@
  * purpose without the permission of Streamlyzer, Inc. is strictly
  * prohibited.
  */
-package com.metamx.druid.realtime;
+package com.metamx.druid.realtime.firehose;
 
 public interface SLDruidJMXMBean {
 

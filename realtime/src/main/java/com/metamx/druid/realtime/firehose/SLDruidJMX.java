@@ -6,13 +6,9 @@
  * purpose without the permission of Streamlyzer, Inc. is strictly
  * prohibited.
  */
-package com.metamx.druid.realtime;
+package com.metamx.druid.realtime.firehose;
 
-import javax.management.AttributeChangeNotification;
-import javax.management.MBeanNotificationInfo;
-import javax.management.NotificationBroadcasterSupport;
-
-public class SLDruidJMX 
+public class SLDruidJMX
 //    extends NotificationBroadcasterSupport
         implements SLDruidJMXMBean {
     /*
