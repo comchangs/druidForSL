@@ -33,12 +33,16 @@ import kafka.javaapi.consumer.ConsumerConnector;
 import kafka.message.Message;
 import kafka.message.MessageAndMetadata;
 
+import java.lang.management.ManagementFactory;
 import java.nio.ByteBuffer;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
 
 /**
  */
@@ -66,7 +70,9 @@ public class SLKafkaFirehoseFactory implements FirehoseFactory
 		this.parser = parser;
 
 		parser.addDimensionExclusion("feed");
-	}
+        // Setup JMX
+        setMBean();
+    }
 
     public static int countFlag = 0;
     public static String printMessage(Message message)
@@ -75,6 +81,25 @@ public class SLKafkaFirehoseFactory implements FirehoseFactory
         byte [] bytes = new byte[buffer.remaining()];
         buffer.get(bytes);
         return new String(bytes);
+    }
+
+    public static void setMBean()
+    {
+        ObjectName mbeanObjectName;
+        SLDruidJMX mbean;
+        MBeanServer mbs;
+
+        mbs = ManagementFactory.getPlatformMBeanServer();
+
+        try {
+            mbeanObjectName = new ObjectName("com.metamx.druid.realtime:type=SLDruidJMX");
+            mbean = new SLDruidJMX();
+            mbs.registerMBean(mbean, mbeanObjectName);
+        } catch ( Exception e) {
+            log.error("\t!!! Could not register SLDruidJMX MBean !!!");
+            e.printStackTrace();
+            return;
+        }
     }
 
 	@Override
