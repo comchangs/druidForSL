@@ -74,7 +74,6 @@ public class SLKafkaFirehoseFactory implements FirehoseFactory
         setMBean();
     }
 
-    public static int countFlag = 0;
     public static String printMessage(Message message)
     {
         ByteBuffer buffer = message.payload();
@@ -143,7 +142,7 @@ public class SLKafkaFirehoseFactory implements FirehoseFactory
 		public InputRow nextRow() throws FormattedException
 		{
 			final Message message = iter.next().message();
-            if (countFlag++ % 50 == 0) log.info(printMessage(message));
+            if (SLDruidJMX.LogNum++ % 50 == 0) log.info(printMessage(message));
 
 			if (message == null)
 			{
