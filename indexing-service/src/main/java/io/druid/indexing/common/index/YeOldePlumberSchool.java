@@ -123,7 +123,7 @@ public class YeOldePlumberSchool implements PlumberSchool
       }
 
       @Override
-      public void finishJob()
+      public void finishJob(Runnable commitRunnable)
       {
         // The segment we will upload
         File fileToUpload = null;

@@ -198,7 +198,7 @@ public class FlushingPlumber extends RealtimePlumber
   }
 
   @Override
-  public void finishJob()
+  public void finishJob(final Runnable commitRunnable)
   {
     log.info("Stopping job");
 

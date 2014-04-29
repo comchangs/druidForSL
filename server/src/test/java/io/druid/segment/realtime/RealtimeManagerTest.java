@@ -250,7 +250,7 @@ public class RealtimeManagerTest
     }
 
     @Override
-    public void finishJob()
+    public void finishJob(Runnable commitRunnable)
     {
       finishedJob = true;
     }

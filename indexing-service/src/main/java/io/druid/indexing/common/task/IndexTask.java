@@ -392,7 +392,7 @@ public class IndexTask extends AbstractFixedIntervalTask
     plumber.persist(firehose.commit());
 
     try {
-      plumber.finishJob();
+      plumber.finishJob(firehose.commit());
     }
     finally {
       log.info(

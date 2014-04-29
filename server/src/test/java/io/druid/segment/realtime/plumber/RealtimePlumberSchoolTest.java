@@ -159,6 +159,15 @@ public class RealtimePlumberSchoolTest
         throw new ISE("Taking too long to set perist value");
       }
     }
-    plumber.finishJob();
+    plumber.finishJob(
+            new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    committed.setValue(true);
+                }
+            }
+    );
   }
 }

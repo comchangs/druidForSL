@@ -359,7 +359,7 @@ public class RealtimeIndexTask extends AbstractTask
       if (normalExit) {
         try {
           plumber.persist(firehose.commit());
-          plumber.finishJob();
+          plumber.finishJob(firehose.commit());
         }
         catch (Exception e) {
           log.makeAlert(e, "Failed to finish realtime task").emit();

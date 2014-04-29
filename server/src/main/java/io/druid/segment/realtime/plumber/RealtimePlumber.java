@@ -378,8 +378,11 @@ public class RealtimePlumber implements Plumber
   }
 
   @Override
-  public void finishJob()
+  public void finishJob(final Runnable commitRunnable)
   {
+    log.info("===============================================");
+    persist(commitRunnable);
+    log.info("===============================================");
     log.info("Shutting down...");
 
     shuttingDown = true;

@@ -243,7 +243,7 @@ public class RealtimeManager implements QuerySegmentWalker
       } finally {
         Closeables.closeQuietly(firehose);
         if (normalExit) {
-          plumber.finishJob();
+          plumber.finishJob(firehose.commit());
           plumber = null;
           firehose = null;
         }

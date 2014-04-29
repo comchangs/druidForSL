@@ -45,5 +45,5 @@ public interface Plumber
    * Perform any final processing and clean up after ourselves. Should be called after all data has been
    * fed into sinks and persisted.
    */
-  public void finishJob();
+  public void finishJob(Runnable commitRunnable);
 }
