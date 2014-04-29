@@ -44,7 +44,7 @@ import java.util.concurrent.ExecutorService;
  */
 public class RealtimePlumberSchool implements PlumberSchool
 {
-  public static final int DEFAULT_MAX_PENDING_PERSISTS = 2;
+  public static final int DEFAULT_MAX_PENDING_PERSISTS = 0;
 
   private static final EmittingLogger log = new EmittingLogger(RealtimePlumberSchool.class);
 
@@ -117,6 +117,12 @@ public class RealtimePlumberSchool implements PlumberSchool
     this.rejectionPolicyFactory = factory;
   }
 
+  @JsonProperty("maxPendingPersists")
+  public void setDefaultMaxPendingPersists(int maxPendingPersists)
+  {
+    this.maxPendingPersists = maxPendingPersists;
+  }
+
   public void setEmitter(ServiceEmitter emitter)
   {
     this.emitter = emitter;
@@ -150,11 +156,6 @@ public class RealtimePlumberSchool implements PlumberSchool
   public void setQueryExecutorService(ExecutorService executorService)
   {
     this.queryExecutorService = executorService;
-  }
-
-  public void setDefaultMaxPendingPersists(int maxPendingPersists)
-  {
-    this.maxPendingPersists = maxPendingPersists;
   }
 
   @Override

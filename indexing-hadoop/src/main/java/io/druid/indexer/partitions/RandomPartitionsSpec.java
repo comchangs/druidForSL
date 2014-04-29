@@ -21,27 +21,21 @@ package io.druid.indexer.partitions;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.druid.indexer.DetermineHashedPartitionsJob;
-import io.druid.indexer.HadoopDruidIndexerConfig;
-import io.druid.indexer.Jobby;
 
 import javax.annotation.Nullable;
 
-public class RandomPartitionsSpec extends AbstractPartitionsSpec
+// for backward compatibility
+@Deprecated
+public class RandomPartitionsSpec extends HashedPartitionsSpec
 {
   @JsonCreator
   public RandomPartitionsSpec(
       @JsonProperty("targetPartitionSize") @Nullable Long targetPartitionSize,
       @JsonProperty("maxPartitionSize") @Nullable Long maxPartitionSize,
-      @JsonProperty("assumeGrouped") @Nullable Boolean assumeGrouped
+      @JsonProperty("assumeGrouped") @Nullable Boolean assumeGrouped,
+      @JsonProperty("numShards") @Nullable Integer numShards
   )
   {
-    super(targetPartitionSize, maxPartitionSize, assumeGrouped);
-  }
-
-  @Override
-  public Jobby getPartitionJob(HadoopDruidIndexerConfig config)
-  {
-    return new DetermineHashedPartitionsJob(config);
+    super(targetPartitionSize, maxPartitionSize, assumeGrouped, numShards);
   }
 }

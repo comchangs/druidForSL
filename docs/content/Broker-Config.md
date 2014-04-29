@@ -26,6 +26,11 @@ druid.service=broker
 druid.port=8080
 
 druid.zk.service.host=localhost
+
+# Change these to make Druid faster
+druid.processing.buffer.sizeBytes=100000000
+druid.processing.numThreads=1
+
 ```
 
 Production Configs
@@ -76,7 +81,7 @@ druid.server.http.numThreads=50
 druid.request.logging.type=emitter
 druid.request.logging.feed=druid_requests
 
-druid.monitoring.monitors=["com.metamx.metrics.SysMonitor","com.metamx.metrics.JvmMonitor", "io.druid.client.cache.CacheMonitor"]
+druid.monitoring.monitors=["com.metamx.metrics.SysMonitor","com.metamx.metrics.JvmMonitor"]
 
 # Emit metrics over http
 druid.emitter=http
@@ -95,22 +100,22 @@ The broker module uses several of the default modules in [Configuration](Configu
 |Property|Possible Values|Description|Default|
 |--------|---------------|-----------|-------|
 |`druid.broker.cache.type`|`local`, `memcached`|The type of cache to use for queries.|`local`|
-|`druid.broker.balancer.type`|`random`, `connectionCount`|Determines how the broker balances connections to compute nodes. `random` choose randomly, `connectionCount` picks the node with the fewest number of active connections to|`random`|
+|`druid.broker.balancer.type`|`random`, `connectionCount`|Determines how the broker balances connections to historical nodes. `random` choose randomly, `connectionCount` picks the node with the fewest number of active connections to|`random`|
 
 #### Local Cache
 
 |Property|Description|Default|
 |--------|-----------|-------|
-|`druid.broker.cache.sizeInBytes`|Maximum size of the cache. If this is zero, cache is disabled.|0|
-|`druid.broker.cache.initialSize`|The initial size of the cache in bytes.|500000|
-|`druid.broker.cache.logEvictionCount`|If this is non-zero, there will be an eviction of entries.|0|
+|`druid.broker.cache.sizeInBytes`|Maximum cache size in bytes. Zero disables caching.|0|
+|`druid.broker.cache.initialSize`|Initial size of the hashtable backing the cache.|500000|
+|`druid.broker.cache.logEvictionCount`|If non-zero, log cache eviction every `logEvictionCount` items.|0|
 
 #### Memcache
 
 |Property|Description|Default|
 |--------|-----------|-------|
-|`druid.broker.cache.expiration`|Memcache [expiration time ](https://code.google.com/p/memcached/wiki/NewCommands#Standard_Protocol).|2592000 (30 days)|
-|`druid.broker.cache.timeout`|Maximum time in milliseconds to wait for a response from Memcache.|500|
-|`druid.broker.cache.hosts`|Memcache hosts.|none|
-|`druid.broker.cache.maxObjectSize`|Maximum object size in bytes for a Memcache object.|52428800 (50 MB)|
-|`druid.broker.cache.memcachedPrefix`|Key prefix for all keys in Memcache.|druid|
+|`druid.broker.cache.expiration`|Memcached [expiration time](https://code.google.com/p/memcached/wiki/NewCommands#Standard_Protocol).|2592000 (30 days)|
+|`druid.broker.cache.timeout`|Maximum time in milliseconds to wait for a response from Memcached.|500|
+|`druid.broker.cache.hosts`|Command separated list of Memcached hosts `<host:port>`.|none|
+|`druid.broker.cache.maxObjectSize`|Maximum object size in bytes for a Memcached object.|52428800 (50 MB)|
+|`druid.broker.cache.memcachedPrefix`|Key prefix for all keys in Memcached.|druid|

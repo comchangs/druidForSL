@@ -42,7 +42,7 @@ Metrics (things to aggregate over):
 Setting Up
 ----------
 
-At this point, you should already have Druid downloaded and are comfortable with running a Druid cluster locally. If you are not, see [here](Tutiroal%3A-The-Druid-Cluster.html).
+At this point, you should already have Druid downloaded and are comfortable with running a Druid cluster locally. If you are not, see [here](Tutorial%3A-The-Druid-Cluster.html).
 
 Let's start from our usual starting point in the tarball directory.
 
@@ -65,6 +65,8 @@ Open the file and make sure the following events exist:
 There are five data points spread across the day of 2013-08-31. Talk about big data right? Thankfully, we don't need a ton of data to introduce how batch ingestion works.
 
 In order to ingest and query this data, we are going to need to run a historical node, a coordinator node, and an indexing service to run the batch ingestion.
+
+Note: If Zookeeper and MySQL aren't running, you'll have to start them again as described in [The Druid Cluster](Tutorial%3A-The-Druid-Cluster.html).
 
 #### Starting a Local Indexing Service
 
@@ -134,7 +136,7 @@ Indexing the Data
 To index the data and build a Druid segment, we are going to need to submit a task to the indexing service. This task should already exist:
 
 ```
-examples/indexing/index_task.json
+examples/indexing/wikipedia_index_task.json
 ```
 
 Open up the file to see the following:

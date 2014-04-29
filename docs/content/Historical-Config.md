@@ -36,8 +36,6 @@ druid.processing.numThreads=1
 druid.segmentCache.locations=[{"path": "/tmp/druid/indexCache", "maxSize"\: 10000000000}]
 ```
 
-Note: This will spin up a Historical node with the local filesystem as deep storage.
-
 Production Configs
 ------------------
 These production configs are using S3 as a deep store.
@@ -67,9 +65,9 @@ Runtime.properties:
 ```
 druid.host=#{IP_ADDR}:8080
 druid.port=8080
-druid.service=druid/prod/compute/_default
+druid.service=druid/prod/historical/_default
 
-druid.extensions.coordinates=["io.druid.extensions:druid-s3-extensions:0.6.58"]
+druid.extensions.coordinates=["io.druid.extensions:druid-s3-extensions:#{DRUID_VERSION}"]
 
 druid.zk.service.host=#{ZK_IPs}
 druid.zk.paths.base=/druid/prod
