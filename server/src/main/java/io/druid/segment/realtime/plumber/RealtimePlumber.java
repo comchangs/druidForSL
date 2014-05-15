@@ -414,8 +414,8 @@ public class RealtimePlumber implements Plumber
       }
       catch (InterruptedException e) {
         throw Throwables.propagate(e);
-        commitRunnable.run();
       }
+      commitRunnable.run();
     }
 
     shutdownExecutors();
