@@ -380,7 +380,7 @@ public class RealtimePlumber implements Plumber
   @Override
   public void finishJob(final Runnable commitRunnable)
   {
-
+    log.info("[DEBUG]Streamlyzer" + "start: finishJob(final Runnable commitRunnable)");
     shuttingDown = true;
 
     for (final Map.Entry<Long, Sink> entry : sinks.entrySet()) {
@@ -416,6 +416,7 @@ public class RealtimePlumber implements Plumber
         throw Throwables.propagate(e);
       }
       commitRunnable.run();
+      log.info("[DEBUG]Streamlyzer" + "call: commitRunnable.run()");
     }
 
     shutdownExecutors();
