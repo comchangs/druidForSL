@@ -241,12 +241,12 @@ public class RealtimeManager implements QuerySegmentWalker
         normalExit = false;
         throw e;
       } finally {
-        Closeables.closeQuietly(firehose);
         if (normalExit) {
           plumber.finishJob(firehose.commit());
-          plumber = null;
-          firehose = null;
         }
+        Closeables.closeQuietly(firehose);
+        plumber = null;
+        firehose = null;
       }
     }
 
